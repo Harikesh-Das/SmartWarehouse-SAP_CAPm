@@ -14,30 +14,29 @@ type Status : String enum {
 
 /* Entities */
 
-@assert.unique: {orderNo: [orderNo]}
+
 entity SalesOrder : managed {
     key ID                : UUID;
-        orderNo           : Integer not null;
-        customerId        : String not null;
+        orderId           : String not null;
+        customerId : String not null;
         status            : Status not null default 'open';
-        customerLatitude  : String;
-        customerLongitude : String;
+        customerLatitude  : Decimal not null;
+        customerLongitude : Decimal not null;
 }
 
 entity Item : managed {
     key ID         : UUID;
-        salesOrder : Association to SalesOrder;
-        productId  : String;
-        quantity   : Integer;
+        salesOrder : Association to SalesOrder not null;
+        itemId     : String not null; // Identifies what product was ordered.
+        quantity   : Integer not null;
 
 }
 
-@assert.unique: {warehouseCode: [warehouseCode]}
 entity Warehouse : managed {
     key ID                 : UUID;
-        warehouseCode      : String;
-        warehouseLatitude  : String;
-        warehouseLongitude : String;
-        item               : Association to Item;
-        availableStock     : Integer;
+        warehouseId        : String not null;
+        warehouseLatitude  : Decimal not null;
+        warehouseLongitude : Decimal not null;
+        item               : Association to Item not null;
+        availableStock     : Integer not null default 0;
 }
