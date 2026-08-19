@@ -1,6 +1,17 @@
 {
     "cSpell.words": [
+        "CUST",
         "Datatypes",
+        "Edmx",
+        "OSRM",
         "smartwarehouse"
-    ]
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:SmartWarehouse}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }

@@ -1,0 +1,18 @@
+{
+  "generator-ui5-project": {
+    "namespaceUI5": "com.smartwarehouse",
+    "projectName": "smartwarehouseUI",
+    "uimoduleName": "smartwarehouse",
+    "enableFPM": true,
+    "enableTypescript": false,
+    "enableFioriTools": true,
+    "platform": "Static webserver",
+    "ui5Libs": "Local resources (SAPUI5)",
+    "newDir": false,
+    "initRepo": false,
+    "projectId": "com.smartwarehouse.smartwarehouseUI",
+    "uimodules": [
+      "smartwarehouse"
+    ]
+  }
+}
