@@ -57,7 +57,8 @@
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {},
-                "sap.fe.templates": {}
+                "sap.fe.templates": {},
+                "sap.fe.core": {}
             }
         },
         "contentDensities": {
@@ -93,8 +94,13 @@
                     "target": "SalesOrderListReport"
                 },
                 {
+                    "name": "SalesOrderObjectPage",
+                    "pattern": "SalesOrder({SalesOrderKey}):?query:",
+                    "target": "SalesOrderObjectPage"
+                },
+                {
                     "name": "ItemObjectPage",
-                    "pattern": "Item({ItemKey}):?query:",
+                    "pattern": "SalesOrder({SalesOrderKey})/items({ItemKey}):?query:",
                     "target": "ItemObjectPage"
                 }
             ],
@@ -109,9 +115,9 @@
                             "hideFilterBar": true,
                             "initialLoad": true,
                             "navigation": {
-                                "items": {
+                                "SalesOrder": {
                                     "detail": {
-                                        "route": "ItemObjectPage"
+                                        "route": "SalesOrderObjectPage"
                                     }
                                 }
                             }
@@ -126,6 +132,23 @@
                         "settings": {
                             "navigation": {},
                             "contextPath": "/Item"
+                        }
+                    }
+                },
+                "SalesOrderObjectPage": {
+                    "type": "Component",
+                    "id": "SalesOrderObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/SalesOrder",
+                            "navigation": {
+                                "items": {
+                                    "detail": {
+                                        "route": "ItemObjectPage"
+                                    }
+                                }
+                            }
                         }
                     }
                 }

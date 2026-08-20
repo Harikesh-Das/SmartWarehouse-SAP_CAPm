@@ -18,10 +18,12 @@ type Status : String enum {
 entity SalesOrder : managed {
     key ID                : UUID;
         orderId           : String not null;
-        customerId : String not null;
+        customerId        : String not null;
         status            : Status not null default 'open';
         customerLatitude  : Decimal not null;
         customerLongitude : Decimal not null;
+        items             : Composition of many Item
+                                on items.salesOrder = $self;
 }
 
 entity Item : managed {

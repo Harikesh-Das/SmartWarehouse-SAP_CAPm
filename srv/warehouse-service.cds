@@ -11,7 +11,7 @@ type BestWarehouse : {
 /* Projections */
 service WarehouseService {
 
-    entity SalesOrder     as projection on db.SalesOrder;
+    entity SalesOrder     as projection on db.SalesOrder{*,items};
 
     entity Item           as projection on db.Item;
 

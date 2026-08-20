@@ -47,8 +47,10 @@ async function getWarehouseDistances(customerLat, customerLon, warehouses) {
 
     results.sort((a, b) => a.distance - b.distance);
 
+
     return results;
 }
+
 //-----------------------------------------------------------------------------
 
 export default cds.service.impl(function () {
@@ -186,12 +188,17 @@ export default cds.service.impl(function () {
         } catch (error) {
             return req.reject(500, error.message);
         }
+        console.log(distances);
+        
 
 
         // Find nearest among maximum coverage warehouses
         distances.sort(
             (a, b) => a.distance - b.distance
         );
+        
+        console.log(distances);
+
 
         const nearest = distances[0];
 
