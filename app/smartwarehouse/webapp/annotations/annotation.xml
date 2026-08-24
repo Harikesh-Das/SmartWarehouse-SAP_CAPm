@@ -71,6 +71,9 @@
                                     <PropertyValue Property="Value" Path="quantity" />
                                     <PropertyValue Property="Label" String="Quantity" />
                                 </Record>
+                                <Record Type="UI.DataField"  >
+                                    <PropertyValue Property="Value" Path=""  ></PropertyValue >
+                                </Record >
                             </Collection>
                         </PropertyValue>
                     </Record>

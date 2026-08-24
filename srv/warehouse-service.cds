@@ -15,7 +15,7 @@ service WarehouseService {
 
     entity Item           as projection on db.Item;
 
-    entity Warehouse      as projection on db.Warehouse;
+    entity Warehouse      as projection on db.Warehouse{*,item};
 
 
     //-------------------------------------------------------------------

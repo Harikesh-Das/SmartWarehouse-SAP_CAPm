@@ -1,6 +1,7 @@
 import cds from '@sap/cds';
 
 
+
 /* OSRM Helper Function */
 async function getWarehouseDistances(customerLat, customerLon, warehouses) {
 
@@ -58,7 +59,7 @@ export default cds.service.impl(function () {
     /* Accessing Entities */
     const { SalesOrder, Item, Warehouse } = this.entities;
     //-------------------------------------------------------------------------------------------------------
-    
+
     /* Event Handlers */
 
     // Get best warehouse handler
@@ -108,6 +109,18 @@ export default cds.service.impl(function () {
             );
         }
 
+        const allItems = await tx.run(
+            SELECT.from(Item).columns('ID', 'itemId')
+        );
+
+        const itemIdMap = new Map(
+            allItems.map(item => [item.ID, item.itemId])
+        );
+
+        for (const row of warehouseRows) {
+            row.productItemId = itemIdMap.get(row.item_ID);
+        }
+
 
         // Find how many SalesOrder items each warehouse can supply
         const warehouseMap = new Map();
@@ -136,7 +149,7 @@ export default cds.service.impl(function () {
             for (const item of items) {
 
                 const stockRow = warehouse.rows.find(
-                    row => row.item_ID === item.ID
+                    row => row.productItemId === item.itemId
                 );
 
                 if (
@@ -189,14 +202,14 @@ export default cds.service.impl(function () {
             return req.reject(500, error.message);
         }
         console.log(distances);
-        
+
 
 
         // Find nearest among maximum coverage warehouses
         distances.sort(
             (a, b) => a.distance - b.distance
         );
-        
+
         console.log(distances);
 
 
@@ -214,7 +227,7 @@ export default cds.service.impl(function () {
         for (const item of items) {
 
             const allocation = selectedWarehouse.availableItems.find(
-                x => x.item.ID === item.ID
+                x => x.item.itemId === item.itemId
             );
 
             if (!allocation) {
@@ -253,7 +266,7 @@ export default cds.service.impl(function () {
             }
 
             availableItemIds.push(item.itemId);
-        } 
+        }
 
 
         // Return result

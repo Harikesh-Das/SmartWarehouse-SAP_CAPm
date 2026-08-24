@@ -148,6 +148,16 @@
                                         "route": "ItemObjectPage"
                                     }
                                 }
+                            },
+                            "content": {
+                                "body": {
+                                    "sections": {
+                                        "WarehouseAllocation": {
+                                            "template": "smartwarehouse.ext.fragment.WarehouseAllocation",
+                                            "title": "Warehouse Allocation"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
