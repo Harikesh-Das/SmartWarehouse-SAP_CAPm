@@ -19,8 +19,7 @@ sap.ui.define([
 
             const oRoot = oControl.getParent();
 
-            // Hide previous result
-            oRoot.getItems()[2].setVisible(false);
+            // Hide previous resoolt
 
             const oModel = oContext.getModel();
 
