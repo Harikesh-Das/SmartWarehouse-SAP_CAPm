@@ -1,6 +1,0 @@
-/*!
- * SAP UI development toolkit for HTML5 (SAPUI5)
- *      (c) Copyright 2009-2026 SAP SE. All rights reserved
- */
-sap.ui.define(["sap/ui/core/Lib"],function(t){"use strict";const e=function(t){if(t){const e=t.split(" ");let r;if(e.length===1){r=e[0].substring(0,3).toUpperCase()}else if(e.length===2){r=(e[0].substring(0,1)+e[1].substring(0,1)).toUpperCase()}else{r=(e[0].substring(0,1)+e[1].substring(0,1)+e[2].substring(0,1)).toUpperCase()}return r}else{return""}};e.__functionName="._formatters.KPIFormatter#labelFormat";const r=function(e,r,s,n,o){const i=t.getResourceBundleFor("sap.fe.core");const a=n?`C_KPI_TOOLTIP_${n.toUpperCase()}`:"C_KPI_TOOLTIP_NONE";let u;if(o==="true"){if(!s){u=i.getText("C_KPI_TOOLTIP_AMOUNT_MULTIUNIT")}else{u=`${r} ${s}`}}else{u=r}return i.getText(a,[e,u])};r.__functionName="._formatters.KPIFormatter#tooltipFormat";const s=function(t){if(s.hasOwnProperty(t)){for(var e=arguments.length,r=new Array(e>1?e-1:0),n=1;n<e;n++){r[n-1]=arguments[n]}return s[t].apply(this,r)}else{return""}};s.labelFormat=e;s.tooltipFormat=r;return s},false);
-//# sourceMappingURL=KPIFormatter.js.map

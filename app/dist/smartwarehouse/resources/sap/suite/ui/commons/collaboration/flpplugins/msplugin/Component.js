@@ -1,8 +1,0 @@
-/*!
- * 
-		SAP UI development toolkit for HTML5 (SAPUI5)
-		(c) Copyright 2009-2015 SAP SE. All rights reserved
-	
- */
-sap.ui.define(["sap/ui/core/Component","sap/ushell/EventHub","sap/base/Log","../../ServiceContainer","../../CollaborationHelper"],function(n,a,e,t,o){"use strict";var i=e.getLogger("sap.suite.ui.commons.collaboration.flpplugins.msplugin.Component");const r="sap-collaboration-authEndUrl";const s="CollaborationMSPluginLoaded";return n.extend("sap.suite.ui.commons.collaboration.flpplugins.msplugin.Component",{metadata:{manifest:"json",properties:{isShareAsLinkEnabled:{name:"isShareAsLinkEnabled",type:"string"},isShareAsTabEnabled:{name:"isShareAsTabEnabled",type:"string"},isShareAsCardEnabled:{name:"isShareAsCardEnabled",type:"string"},applicationId:{name:"applicationId",type:"string"},tenantId:{name:"tenantId",type:"string"},isDirectCommunicationEnabled:{name:"isDirectCommunicationEnabled",type:"string"}}},init:function(){var n=this._loadPluginConfigData();if(n){o._getCurrentUrl().then(function(n){try{const a=new URL(n);if(a.searchParams.has(r)){const n=decodeURIComponent(a.searchParams.get(r));window.location.replace(n)}}catch(n){i.error(`Error while redirecting to auth end url`)}});t.setCollaborationType("COLLABORATION_MSTEAMS",n)}else{i.error("Collaboration configuration for Microsoft Teams Integration could not be loaded.")}a.emit(s)},_loadPluginConfigData:function(){var n=this.getComponentData();return n&&n.config}})});
-//# sourceMappingURL=Component.js.map

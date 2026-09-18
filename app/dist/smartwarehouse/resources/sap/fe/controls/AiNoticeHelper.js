@@ -1,6 +1,0 @@
-/*!
- * SAP UI development toolkit for HTML5 (SAPUI5)
- *      (c) Copyright 2009-2026 SAP SE. All rights reserved
- */
-sap.ui.define(["sap/m/Button","sap/m/OverflowToolbar","sap/m/Popover","sap/m/Text","sap/m/ToolbarSpacer","sap/ui/core/Lib","sap/fe/base/jsx-runtime/jsx","sap/fe/base/jsx-runtime/Fragment","sap/fe/base/jsx-runtime/jsxs"],function(e,t,n,r,s,o,a,c,i){"use strict";function p(e){let t=e;while(t&&!t.isA("sap.ui.core.mvc.View")){t=t.getParent()}return t??undefined}return{generatePopover(u){const{parent:l,placementType:d}=u;const m=o.getResourceBundleFor("sap.fe.controls");const f=()=>{if(u.contentText!==undefined){return new r({text:u.contentText})}const{content:e}=u;return Array.isArray(e)?e.map(e=>e.clone()):e?.clone()};const x=p(u.parent);const T=a(n,{class:"sapUiContentPadding",contentMinWidth:"22.8125rem",showArrow:true,showHeader:true,placement:d,title:m.getText("M_POPOVER_AI_TITLE"),afterClose:()=>{x?.removeDependent(T);T?.destroy()},children:{content:f(),footer:a(t,{children:{content:i(c,{children:[a(s,{}),a(e,{text:m.getText("M_NOTICE_AI_CLOSE"),press:()=>{T.close()}})]})}})}});x?.addDependent(T);T.openBy(l);return T}}},false);
-//# sourceMappingURL=AiNoticeHelper.js.map

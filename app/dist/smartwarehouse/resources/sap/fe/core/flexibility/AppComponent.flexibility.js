@@ -1,6 +1,0 @@
-/*!
- * SAP UI development toolkit for HTML5 (SAPUI5)
- *      (c) Copyright 2009-2026 SAP SE. All rights reserved
- */
-sap.ui.define(["sap/base/Log","sap/fe/core/CommonUtils","sap/fe/core/flexibility/XMLTools","sap/ui/core/Component","sap/ui/fl/apply/api/DelegateMediatorAPI"],function(e,n,t,r,o){"use strict";var i=t.addGeneratedIdsToControls;async function s(t,o){try{if(o.appComponent.isA("sap.fe.core.AppComponent")){const e=o.componentId?r.getComponentById(o.componentId):r.getOwnerComponentFor(o.view);const s=e?.preprocessorContext??{};const a=(new DOMParser).parseFromString(t,"text/xml");const p=await n.templateControlFragment(a.firstElementChild,{models:s.models,bindingContexts:s.bindingContexts},{view:o.view,isXML:true},o.modifier);if(p instanceof Element){i(p);return p.outerHTML}return t}else{return t}}catch(n){e.error("Error during Fiori Elements XML Templating in flexibility handler:",n);return t}}o.registerAddXMLAdjustFragmentHandler({key:"FEXMLTemplating",handler:s,reference:"sap.fe.macros.BaseAddXMLAdjustFragmentHandler"})},false);
-//# sourceMappingURL=AppComponent.flexibility.js.map

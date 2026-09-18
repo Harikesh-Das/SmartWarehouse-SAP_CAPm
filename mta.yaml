@@ -2,17 +2,14 @@ _schema-version: 3.3.0
 ID: SmartWarehouse
 version: 1.0.0
 description: "A simple CAP project."
-
 parameters:
   enable-parallel-deployments: true
-
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npm ci
         - npx cds build --production
-
 modules:
   - name: SmartWarehouse-srv
     type: nodejs
@@ -23,7 +20,7 @@ modules:
     build-parameters:
       builder: npm-ci
     provides:
-      - name: srv-api
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
     requires:
@@ -36,20 +33,6 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: SmartWarehouse-db
-
-    
-  - name: com.smartwarehouse.smartwarehouseUI
-    type: staticfile
-    path: app
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:workspaces
-      build-result: dist
-    parameters:
-      disk-quota: 256M
-      memory: 256M
 
 resources:
   - name: SmartWarehouse-db

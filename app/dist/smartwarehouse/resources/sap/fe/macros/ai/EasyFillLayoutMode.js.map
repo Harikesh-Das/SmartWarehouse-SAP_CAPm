@@ -1,1 +1,0 @@
-{"version":3,"file":"EasyFillLayoutMode.js","names":["EasyFillLayoutMode","_exports"],"sources":["./EasyFillLayoutMode.ts"],"sourcesContent":["export enum EasyFillLayoutMode {\n\tCONDENSED = \"condensed\",\n\tDETAILED = \"detail page view\"\n}\n"],"mappings":";;;;sDAAYA,EAAkB,SAAlBA,KAAkB,yBAAlBA,EAAkB,sCAAlBA,CAAkB,MAAAC,EAAAD,qBAAA,OAAAC,CAAA","ignoreList":[]}

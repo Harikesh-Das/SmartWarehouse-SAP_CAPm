@@ -1,3 +1,0 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" controllerName="sap.fe.core.buildingBlockContext.ContainerPage">
-	<m:Page />
-</mvc:View>

@@ -1,1 +1,0 @@
-{"version":3,"names":["PageController"],"sourceRoot":".","sources":["PageController.controller.ts"],"sourcesContent":["import PageController from \"sap/fe/core/PageController\";\n\nexport default PageController;\n"],"mappings":";;;;;;;SAEeA,cAAc;AAAA","ignoreList":[],"file":"PageController-dbg.controller.js"}

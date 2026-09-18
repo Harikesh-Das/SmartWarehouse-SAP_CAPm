@@ -1,6 +1,0 @@
-/*!
- * SAP UI development toolkit for HTML5 (SAPUI5)
- *      (c) Copyright 2009-2026 SAP SE. All rights reserved
- */
-sap.ui.define(["sap/base/Log","sap/fe/base/BindingToolkit"],function(e,n){"use strict";var a={};var t=n.pathInModel;var o=n.getExpressionFromAnnotation;var i=n.concatWithSeparator;const r=(n,a)=>{const r=n.annotations?.UI?.HeaderInfo?.Title;if(r){switch(r.$Type){case"com.sap.vocabularies.UI.v1.DataField":if(a?.includes(r.Value.path)){return o(r.Value)}break;case"com.sap.vocabularies.UI.v1.DataFieldForAnnotation":e.error("DataFieldForAnnotation with connected fields not supported for HeaderInfo.Title");return o(n.annotations?.UI?.HeaderInfo?.TypeName)}}const s=n.annotations?.Common?.SemanticKey;if(s){const e=a?.length?s.filter(e=>a.includes(e.value)):s;if(e.length>0){return i(" - ",...e.map(e=>t(e.value)))}}e.warning(`No HeaderInfo.Title or Semantic keys defined or visible for entity ${n.name}`);return o(n.annotations?.UI?.HeaderInfo?.TypeName)};a.getTitleExpression=r;return a},false);
-//# sourceMappingURL=EntityTypeHelper.js.map

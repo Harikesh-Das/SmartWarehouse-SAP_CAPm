@@ -2,7 +2,6 @@ import cds from '@sap/cds';
 
 
 
-
 /* OSRM Helper Function */
 async function getWarehouseDistances(customerLat, customerLon, warehouses) {
 
@@ -81,10 +80,6 @@ export default cds.service.impl(function () {
                 404,
                 `SalesOrder:${salesOrderId} not found`
             );
-        }
-
-        if (salesOrder.status==='allocated') {
-            return req.reject(400, ` warehouse already has been allocated for SalesOrder:${salesOrder.orderId} `)
         }
 
 
@@ -272,14 +267,6 @@ export default cds.service.impl(function () {
 
             availableItemIds.push(item.itemId);
         }
-
-            await tx.run(
-                UPDATE(SalesOrder).set({status:'allocated'}).where({ID: salesOrderId})
-            )
-
-            await tx.run(
-                UPDATE(SalesOrder).set({allocatedWarehouse: nearest.warehouseId}).where({ID:salesOrderId})
-            )
 
 
         // Return result

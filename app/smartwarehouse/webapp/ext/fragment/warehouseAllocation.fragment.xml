@@ -7,7 +7,6 @@
         class="sapUiSmallMargin"
         width="100%"
         core:require="{handler: 'smartwarehouse/ext/controller/warehouseAllocation.controller'}"
-        modelContextChange="handler.onInit"
     >
         <HBox
             id="statistics"
@@ -51,9 +50,7 @@
         <Button
             id="allocate"
             text="Allocate Warehouse"
-            icon="sap-icon://retail-store"
             core:require="{handler: 'smartwarehouse/ext/controller/warehouseAllocation.controller'}"
-            type="Emphasized"
             press="handler.allocateWarehouse"
             class="sapUiSmallMargin"
         />

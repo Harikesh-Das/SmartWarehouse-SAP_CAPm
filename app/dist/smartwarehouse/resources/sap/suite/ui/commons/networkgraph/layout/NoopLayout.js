@@ -1,8 +1,0 @@
-/*!
- * 
-		SAP UI development toolkit for HTML5 (SAPUI5)
-		(c) Copyright 2009-2015 SAP SE. All rights reserved
-	
- */
-sap.ui.define(["sap/suite/ui/commons/library","./LayoutAlgorithm","./LayoutTask","../util/ConnectionPathUtils","../util/DependencyLayoutHelper"],function(e,t,n,o,i){"use strict";var r=e.networkgraph.LayoutRenderType,a=e.networkgraph.ComponentArrangement;var u=t.extend("sap.suite.ui.commons.networkgraph.layout.NoopLayout",{metadata:{library:"sap.suite.ui.commons",properties:{enableOptimizedLineAlgorithm:{type:"boolean",group:"Behavior",defaultValue:false},componentArrangement:{type:"sap.suite.ui.commons.networkgraph.ComponentArrangement",group:"Behavior",defaultValue:a.Horizontal}}}});const s=54;const l=44;u.prototype.getLayoutRenderType=function(){return r.LayeredWithGroups};u.prototype.layout=function(){return new n(function(e,t,n){var r=this.getParent();if(n.isTerminated()){e();return}if(!r){t("The algorithm must be associated with a graph.");return}if(this._shouldCalculatePositions(r)){i.calculatePositions(r,{componentArrangement:this.getComponentArrangement()});if(r._bTriggerLayoutCalculation){r._bTriggerLayoutCalculation=false}}if(this.getEnableOptimizedLineAlgorithm()){o.normalizeLines(r,{gridSize:s,minEdgeLength:l})}else{this._normalizeLines()}e()}.bind(this))};u.prototype._shouldCalculatePositions=function(e){if(e._bTriggerLayoutCalculation){return true}return e.getNodes().some(function(e){var t=e.getX();var n=e.getY();return(t===0||t===undefined)&&(n===0||n===undefined)})};return u});
-//# sourceMappingURL=NoopLayout.js.map

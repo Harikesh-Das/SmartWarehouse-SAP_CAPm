@@ -1,2 +1,0 @@
-sap.ui.define(["sap/fe/core/AppComponent"],function(t){"use strict";return t.extend("smartwarehouse.Component",{metadata:{manifest:"json"},init:function(){t.prototype.init.apply(this,arguments);this.getRouter().initialize()}})});
-//# sourceMappingURL=Component.js.map
