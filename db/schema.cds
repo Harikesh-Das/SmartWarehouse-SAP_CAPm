@@ -6,8 +6,7 @@ using {managed} from '@sap/cds/common';
 type Status : String enum {
     open;
     allocated;
-    completed;
-    cancelled
+    
 };
 //-------------------------------------------------------------------------
 
@@ -24,6 +23,7 @@ entity SalesOrder : managed {
         customerLongitude : Decimal not null;
         items             : Composition of many Item
                                 on items.salesOrder = $self;
+        allocatedWarehouse: String not null default 'None'
 }
 
 entity Item : managed {
