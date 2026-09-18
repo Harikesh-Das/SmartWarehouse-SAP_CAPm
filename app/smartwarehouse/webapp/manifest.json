@@ -15,20 +15,10 @@
             "version": ""
         },
         "dataSources": {
-            "annotation": {
-                "type": "ODataAnnotation",
-                "uri": "annotations/annotation.xml",
-                "settings": {
-                    "localUri": "annotations/annotation.xml"
-                }
-            },
             "mainService": {
                 "uri": "/odata/v4/warehouse/",
                 "type": "OData",
                 "settings": {
-                    "annotations": [
-                        "annotation"
-                    ],
                     "odataVersion": "4.0"
                 }
             }
@@ -51,7 +41,19 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ListReport.ListReportController": {
+                        "controllerName": "smartwarehouse.ext.controller.SalesOrderListReport"
+                    },
+                    "sap.fe.templates,ObjectPage.ObjectPageController":{
+                        "controllerName":"smartwarehouse.ext.controller.SalesOrderObjectPage"
+                    }
+                }
+            }
+        },
         "dependencies": {
             "minUI5Version": "1.148.3",
             "libs": {
@@ -112,8 +114,18 @@
                     "options": {
                         "settings": {
                             "contextPath": "/SalesOrder",
-                            "hideFilterBar": true,
+                            
                             "initialLoad": true,
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "CreateSalesOrder": {
+                                            "text": "Create Sales Order",
+                                            "press": ".extension.smartwarehouse.ext.controller.SalesOrderListReport.onCreateSalesOrder"
+                                        }
+                                    }
+                                }
+                            },
                             "navigation": {
                                 "SalesOrder": {
                                     "detail": {

@@ -1,0 +1,182 @@
+<core:FragmentDefinition
+	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1"
+	xmlns:macrodata="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:dt="sap.ui.dt"
+	template:require="{
+		ID: 'sap/fe/core/helpers/StableIdHelper',
+		OP: 'sap/fe/templates/ObjectPage/ObjectPageTemplating',
+		COMMON: 'sap/fe/macros/CommonHelper',
+		DATAFIELDANNOTATIONS : 'sap/fe/core/converters/annotations/DataField',
+		DEFAULTACTIONHANDLER: 'sap/fe/macros/internal/helpers/DefaultActionHandler'
+	}"
+>
+	<!--
+		Renders the *active* emphasized-first instances of all emphasized header actions.
+		Supports multiple emphasized actions with dynamic visibility (UI.Hidden) via cascading priority.
+		The caller (Actions.fragment.xml) is responsible for placing this fragment at the desired position.
+	-->
+	<template:repeat list="{converterContext>header/emphasizedFirstActions}" var="emphHeaderAction">
+		<template:if test="{= ${emphHeaderAction>type} === 'ForNavigation' }">
+			<template:with path="emphHeaderAction>annotationPath" var="dataField">
+				<Button
+					id="{= ID.generate(['fe', ${dataField>@@UI.getDataModelObjectPath}, 'EmphasizedFirst']) }"
+					dt:designtime="not-adaptable"
+					text="{emphHeaderAction>text}"
+					press="{= ${emphHeaderAction>command} ? ('cmd:' + ${emphHeaderAction>command}) : ${emphHeaderAction>press}}"
+					visible="{emphHeaderAction>emphFirstVisible}"
+					enabled="{emphHeaderAction>enabled}"
+					type="Emphasized"
+					macrodata:IBNData="{emphHeaderAction>customData}"
+					macrodata:fePrimaryActionShortcut="true"
+				>
+					<layoutData>
+						<OverflowToolbarLayoutData
+							priority="{= ${emphHeaderAction>priority} ? ${emphHeaderAction>priority} : 'Low' }"
+							group="{= ${emphHeaderAction>overflowGroup} || ${emphHeaderAction>group} }"
+						/>
+					</layoutData>
+				</Button>
+			</template:with>
+		</template:if>
+
+		<template:if test="{= (${emphHeaderAction>type} === 'ForAction' || ${emphHeaderAction>type} === 'Copy') }">
+			<template:with path="emphHeaderAction>annotationPath" var="dataField">
+				<template:if
+					test="{= ${dataField>$Type} === 'com.sap.vocabularies.UI.v1.DataFieldForAction' &amp;&amp; ${dataField>Determining} !== true }"
+				>
+					<template:with path="dataField>Action" helper="COMMON.getActionContext" var="actionContext">
+						<Button
+							id="{= ID.generate(['fe', ${dataField>@@UI.getDataModelObjectPath}, 'EmphasizedFirst']) }"
+							dt:designtime="not-adaptable"
+							text="{= ${emphHeaderAction>text} ? ${emphHeaderAction>text} : ${dataField>Label} }"
+							press="{= ${emphHeaderAction>command} ? ('cmd:' + ${emphHeaderAction>command}) : OP.getPressExpressionForEdit(${dataField>}, ${entitySet>@sapui.name}, ${emphHeaderAction>}) }"
+							visible="{emphHeaderAction>emphFirstVisible}"
+							enabled="{emphHeaderAction>enabled}"
+							type="Emphasized"
+							ariaHasPopup="{= DATAFIELDANNOTATIONS.isDataModelObjectPathForActionWithDialog(${actionContext>@@UI.getDataModelObjectPath})}"
+							macrodata:annotatedActionIdentifier="{= ID.generate([${dataField>@@UI.getDataModelObjectPath}]) }"
+							icon="{= ${emphHeaderAction>isAIOperation} ? COMMON.getAIIcon() : undefined }"
+							ariaDescribedBy="{= ${emphHeaderAction>isAIOperation} === true ? 'fe::AiAction::AriaText' : undefined}"
+							macrodata:fePrimaryActionShortcut="true"
+						>
+							<layoutData>
+								<OverflowToolbarLayoutData
+									priority="{= ${emphHeaderAction>priority} ? ${emphHeaderAction>priority} : 'Low' }"
+									group="{emphHeaderAction>group}"
+								/>
+							</layoutData>
+						</Button>
+					</template:with>
+				</template:if>
+			</template:with>
+		</template:if>
+
+		<template:if test="{= OP.isManifestAction(${emphHeaderAction>}) }">
+			<!-- Manifest Menu: place MenuButton first and emphasize it; defaultAction stays the menu defaultAction -->
+			<template:if test="{= ${emphHeaderAction>type} === 'Menu' }">
+				<template:repeat list="{converterContext>header/actions}" var="matchedHeaderAction">
+					<template:if test="{= ${matchedHeaderAction>id} === ${emphHeaderAction>id} }">
+						<template:then>
+							<template:with path="matchedHeaderAction>defaultAction/annotationPath" var="dataFieldForDefaultAction">
+								<template:with
+									path="dataFieldForDefaultAction>Action"
+									helper="COMMON.getActionContext"
+									var="defaultActionContext"
+								>
+									<MenuButton
+										core:require="{FPM: 'sap/fe/core/helpers/FPMHelper'}"
+										text="{matchedHeaderAction>text}"
+										type="Emphasized"
+										menuPosition="BeginBottom"
+										id="{= ID.generate(['fe', ${matchedHeaderAction>id}, 'EmphasizedFirst'])}"
+										dt:designtime="not-adaptable"
+										visible="{emphHeaderAction>emphFirstVisible}"
+										enabled="{matchedHeaderAction>enabled}"
+										useDefaultActionOnly="{= DEFAULTACTIONHANDLER.getUseDefaultActionOnly(${matchedHeaderAction>})}"
+										buttonMode="{= DEFAULTACTIONHANDLER.getButtonMode(${matchedHeaderAction>})}"
+										defaultAction="{= OP.getDefaultActionHandler(${converterContext>header}, ${matchedHeaderAction>}, ${dataFieldForDefaultAction>}, ${entitySet>@sapui.name})}"
+										icon="{= ${matchedHeaderAction>isAIOperation} ? COMMON.getAIIcon() : undefined }"
+										ariaDescribedBy="{= ${matchedHeaderAction>isAIOperation} === true ? 'fe::AiAction::AriaText' : undefined}"
+										macrodata:fePrimaryActionShortcut="true"
+									>
+										<layoutData>
+											<OverflowToolbarLayoutData
+												priority="{= ${matchedHeaderAction>priority} ? ${matchedHeaderAction>priority} : 'Low' }"
+												group="{matchedHeaderAction>group}"
+											/>
+										</layoutData>
+										<menu>
+											<Menu>
+												<template:repeat list="{matchedHeaderAction>menu}" var="menuItemAction">
+													<template:with path="menuItemAction>annotationPath" var="dataField">
+														<template:if test="{= ${menuItemAction>type} === 'ForAction'}">
+															<template:then>
+																<MenuItem
+																	id="{= ID.generate(['fe', ${matchedHeaderAction>id}, ${dataField>@@UI.getDataModelObjectPath}, 'EmphasizedFirst']) }"
+																	text="{dataField>Label}"
+																	press="{= ${menuItemAction>command} ? ('cmd:' + ${menuItemAction>command}) : OP.getPressExpressionForEdit(${dataField>}, ${entitySet>@sapui.name}, ${matchedHeaderAction>}) }"
+																	visible="{menuItemAction>visible}"
+																	enabled="{menuItemAction>enabled}"
+																	macrodata:annotatedActionIdentifier="{= ID.generate([${dataField>@@UI.getDataModelObjectPath}]) }"
+																/>
+															</template:then>
+															<template:elseif test="{= ${menuItemAction>type} === 'ForNavigation'}">
+																<MenuItem
+																	id="{= ID.generate(['fe', ${matchedHeaderAction>id}, ${dataField>@@UI.getDataModelObjectPath}, 'EmphasizedFirst']) }"
+																	text="{dataField>Label}"
+																	press="{= ${menuItemAction>command} ? ('cmd:' + ${menuItemAction>command}) : ${menuItemAction>press}}"
+																	enabled="{menuItemAction>enabled}"
+																	visible="{menuItemAction>visible}"
+																	macrodata:IBNData="{menuItemAction>customData}"
+																/>
+															</template:elseif>
+															<template:else>
+																<MenuItem
+																	id="{= ID.generate(['fe', ${matchedHeaderAction>id}, ${menuItemAction>id}, 'EmphasizedFirst'])}"
+																	text="{menuItemAction>text}"
+																	press="{= ${menuItemAction>command} ? ('cmd:' + ${menuItemAction>command}) : COMMON.buildActionWrapper(${menuItemAction>}, ${converterContext>header})}"
+																	visible="{menuItemAction>visible}"
+																	enabled="{menuItemAction>enabled}"
+																/>
+															</template:else>
+														</template:if>
+													</template:with>
+												</template:repeat>
+											</Menu>
+										</menu>
+									</MenuButton>
+								</template:with>
+							</template:with>
+						</template:then>
+					</template:if>
+				</template:repeat>
+			</template:if>
+
+			<template:if test="{= ${emphHeaderAction>type} !== 'Menu' }">
+				<Button
+					core:require="{FPM: 'sap/fe/core/helpers/FPMHelper'}"
+					id="{= ID.generate(['fe', (${emphHeaderAction>id} ? ${emphHeaderAction>id} : ${emphHeaderAction>key}), 'EmphasizedFirst']) }"
+					dt:designtime="not-adaptable"
+					text="{emphHeaderAction>text}"
+					press="{= ${emphHeaderAction>command} ? ('cmd:' + ${emphHeaderAction>command}) : COMMON.buildActionWrapper(${emphHeaderAction>}, ${converterContext>header}) }"
+					visible="{emphHeaderAction>emphFirstVisible}"
+					enabled="{emphHeaderAction>enabled}"
+					type="Emphasized"
+					icon="{= ${emphHeaderAction>isAIOperation} ? COMMON.getAIIcon() : undefined }"
+					ariaDescribedBy="{= ${emphHeaderAction>isAIOperation} === true ? 'fe::AiAction::AriaText' : undefined}"
+					macrodata:fePrimaryActionShortcut="true"
+				>
+					<layoutData>
+						<OverflowToolbarLayoutData
+							priority="{= ${emphHeaderAction>priority} ? ${emphHeaderAction>priority} : 'Low' }"
+							group="{emphHeaderAction>group}"
+						/>
+					</layoutData>
+				</Button>
+			</template:if>
+		</template:if>
+	</template:repeat>
+</core:FragmentDefinition>

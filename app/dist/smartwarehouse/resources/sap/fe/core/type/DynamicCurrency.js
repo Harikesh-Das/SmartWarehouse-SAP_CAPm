@@ -1,0 +1,6 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+ *      (c) Copyright 2009-2026 SAP SE. All rights reserved
+ */
+sap.ui.define(["sap/fe/base/ClassSupport","sap/ui/model/odata/type/Currency"],function(t,e){"use strict";var o,n;var r=t.defineUI5Class;function a(t,e){t.prototype=Object.create(e.prototype),t.prototype.constructor=t,i(t,e)}function i(t,e){return i=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,e){return t.__proto__=e,t},i(t,e)}const c=2;const s=5;let p=(o=r("sap.fe.core.type.DynamicCurrency"),o(n=function(t){function e(){return t.apply(this,arguments)||this}a(e,t);var o=e.prototype;o.formatValue=function e(o,n){const r=this;if(!("decimalPadding"in r.oFormatOptions)){const t=o[2];if(t!==undefined){const e=t?Object.values(t):[];const o=e.length===0?s:Math.min(e.reduce((t,e)=>Math.max(t,e.UnitSpecificScale??0),c),s);r.oFormatOptions={...r.oFormatOptions,decimalPadding:o}}}return t.prototype.formatValue.call(this,o,n)};return e}(e))||n);return p},false);
+//# sourceMappingURL=DynamicCurrency.js.map

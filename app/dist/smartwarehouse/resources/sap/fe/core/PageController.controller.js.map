@@ -1,0 +1,1 @@
+{"version":3,"file":"PageController.controller.js","names":["PageController"],"sources":["./PageController.controller.ts"],"sourcesContent":["import PageController from \"sap/fe/core/PageController\";\n\nexport default PageController;\n"],"mappings":";;;;6EAEeA,CAAc","ignoreList":[]}

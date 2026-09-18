@@ -1,0 +1,105 @@
+/* ========================================= */
+/* CSS for control sap.fe.controls/EasyFill  */
+/* Base theme                                */
+/* ========================================= */
+
+.sapFeEasyFillReviewArea {
+	background-color: var(--sapShell_Background);
+}
+
+.sapFeEasyFillReviewPaneWrapper {
+	overflow: hidden;
+}
+
+.sapFeEasyFillReviewPaneContainer {
+	min-height: 0;
+	overflow-y: auto;
+}
+
+.sapFeEasyFillReviewArea > .sapMFlexItem.sapUiContentPadding {
+	padding: 0;
+}
+
+.sapFeEasyFillPlaceholder {
+	background-color: var(--sapShell_Background);
+	height: 100%;
+}
+
+.sapFeEasyFillPreviousValue {
+	padding: 0 !important;
+}
+
+.sapFeEasyFillPreviousValue::before {
+	content: attr(data-label);
+	color: var(--sapContent_LabelColor);
+}
+
+.sapFeEasyFillDialog .sapUiFormCL.sapUiFormCLSmallColumns .sapUiFormCLElement > .sapUiFormCLCellsS6 {
+	width: 100%;
+}
+
+#sapFeEasyFillObjectPageLayout {
+	min-width: 20rem;
+}
+
+#sapFeEasyFillObjectPageLayout-spacer {
+	display: none;
+}
+
+.sapFeEasyFillPreviewTable {
+	border-radius: 0.5rem;
+	border: 1px solid var(--sapList_BorderColor);
+}
+
+.sapFeEasyFillPreviewTable .sapMListTblRow:first-child {
+	border-top: none;
+}
+.sapFeEasyFillWarningCell .sapMInputBaseContentWrapper {
+	background-color: var(--sapField_WarningBackground) !important;
+	border-color: var(--sapField_WarningColor) !important;
+}
+.sapFeEasyFillWarningCell .sapMText,
+.sapFeEasyFillWarningCell .sapMLabel {
+	background-color: var(--sapField_WarningBackground) !important;
+}
+
+// do not display header details when it is collapsed, as it takes up space
+.sapFeEasyFillDialog .sapUxAPObjectPageHeaderDetailsHidden {
+	display: none;
+}
+
+.sapFeEasyFillDialog {
+	// unnecessary padding for the inner grid of the section content
+	.sapFeEasyFillSubsection [id$="-innerGrid"] {
+		padding: 0;
+	}
+	// unnecessary margin bottom for the last element in the inner grid of the section content
+	.sapFeEasyFillSubsection [id$="-innerGrid"] > :first-child {
+		margin-bottom: 0;
+	}
+}
+
+// padding for the form containers for fields subsection
+.sapFeEasyFillDialog .sapFeEasyFillForm .sapUiFormCLContainer {
+	padding: 1rem !important;
+}
+
+// unnecessary margin top for table titles which have a margin-top 2rem by default
+.sapFeEasyFillDialog .sapFeEasyFillSectionDetailed {
+	margin-top: 0 !important;
+}
+
+// margin bottom for the last section (detailed layout)
+.sapFeEasyFillDialog .sapFeEasyFillSectionDetailed:last-child {
+	margin-bottom: 2rem;
+}
+
+// margin bottom for the last section (condensed layout)
+.sapFeEasyFillDialog .sapFeEasyFillSectionCondensed:last-child {
+	margin-bottom: 2rem;
+}
+
+// padding top for the first section (condensed layout)
+.sapFeEasyFillDialog .sapFeEasyFillSectionCondensed:first-child {
+	padding-top: 2rem;
+}

@@ -1,0 +1,6 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+ *      (c) Copyright 2009-2026 SAP SE. All rights reserved
+ */
+sap.ui.define(["sap/fe/base/ClassSupport","../TreeTable"],function(t,e){"use strict";var r,o;var n={};var i=t.defineUI5Class;function a(t,e){t.prototype=Object.create(e.prototype),t.prototype.constructor=t,s(t,e)}function s(t,e){return s=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,e){return t.__proto__=e,t},s(t,e)}let u=(r=i("sap.fe.macros.table.TreeTable",{returnTypes:["sap.fe.macros.MacroAPI"]}),r(o=function(t){function e(e){for(var r=arguments.length,o=new Array(r>1?r-1:0),n=1;n<r;n++){o[n-1]=arguments[n]}return t.call(this,e,...o)||this}n=e;a(e,t);var r=e.prototype;r.setMetaPath=function t(e){return this.setProperty("metaPath",e)};r.getMetaPath=function t(){return this.getProperty("metaPath")};r.setIgnoredFields=function t(e){return this.setProperty("ignoredFields",e)};r.getIgnoredFields=function t(){return this.getProperty("ignoredFields")};r.addColumn=function e(r){return t.prototype.addColumn.call(this,r)};r.removeColumn=function e(r){return t.prototype.removeColumn.call(this,r)};r.addAction=function e(r){return t.prototype.addAction.call(this,r)};r.removeAction=function e(r){return t.prototype.removeAction.call(this,r)};return e}(e))||o);n=u;return n},false);
+//# sourceMappingURL=TreeTable.js.map

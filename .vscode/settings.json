@@ -3,6 +3,8 @@
         "CUST",
         "Datatypes",
         "Edmx",
+        "hana",
+        "openui",
         "OSRM",
         "smartwarehouse"
     ],

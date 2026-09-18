@@ -1,0 +1,6 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+ *      (c) Copyright 2009-2026 SAP SE. All rights reserved
+ */
+sap.ui.define(["sap/fe/core/templating/PropertyHelper","sap/fe/core/templating/UIFormatters","sap/fe/core/converters/MetaModelConverter"],function(t,e,n){"use strict";var o={};var r=e.getDisplayMode;var a=t.hasValueHelp;const s=function(t,e){return a(e)?r(t):"Value"};o.getDisplayProperty=s;const c=async function(t,e,n){const o=e?.annotations?.Common?.Text;if(o){return s(t,e)}const c=a(e);if(c){const e=t?.targetEntityType?.annotations?.UI?.TextArrangement;return e?r(t):i(n,t)}return"Value"};o.getFilterFieldDisplayFormat=c;async function i(t,e){const o=t.context;const a=t.context.getModel();return a.requestValueListInfo(o.getPath(),true,o).then(function(t){const o=Object.keys(t)[0];const s=t[o];const c=s.Parameters?.find(t=>t.LocalDataProperty?.$PropertyPath===e?.targetObject?.name);const i=c?.ValueListProperty;const l=s.$model.getMetaModel?.()??a;const u=n.getInvolvedDataModelObjects(l.createBindingContext("/"+s.CollectionPath+"/"+i));return r(u)})}o._getDisplayModeFromValueHelp=i;return o},false);
+//# sourceMappingURL=FilterFieldTemplating.js.map

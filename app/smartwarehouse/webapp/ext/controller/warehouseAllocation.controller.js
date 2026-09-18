@@ -3,10 +3,14 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], function (JSONModel, MessageBox) {
     "use strict";
+    
+
+
 
     return {
 
-        
+      
+
 
         allocateWarehouse: async function (oEvent) {
 
@@ -67,6 +71,8 @@ sap.ui.define([
 
                 await oAction.execute();
 
+                await oContext.requestRefresh();
+
                 const oResult =
                     await oAction
                         .getBoundContext()
@@ -93,6 +99,7 @@ sap.ui.define([
 
                 // Show warehouse result
                 oRoot.getItems()[2].setVisible(true);
+
 
             } catch (oError) {
 

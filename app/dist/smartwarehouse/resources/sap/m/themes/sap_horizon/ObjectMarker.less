@@ -1,0 +1,31 @@
+/* =================================== */
+/* CSS for control sap.m/ObjectMarker  */
+/* Horizon theme                       */
+/* =================================== */
+
+@_sap_m_ObjectMarker_LinkShadowColor: none;
+
+.sapMObjectMarker {
+
+	.sapMLnk {
+		text-shadow: @_sap_m_ObjectMarker_LinkShadowColor;
+
+		&:focus {
+
+			.sapUiIcon {
+				color: var(--sapContent_ContrastTextColor);
+			}
+		}
+	}
+}
+
+.sapMObjectMarker.sapMLnkLargeReactiveArea > .sapUiIcon {
+	line-height: 1.5rem;
+}
+
+.sapMObjectMarkerActiveIconOnly:focus {
+	border-radius: 0.125rem;
+	background-color: var(--sapContent_FocusColor);
+	color: var(--sapContent_ContrastTextColor);
+	text-shadow: none;
+}

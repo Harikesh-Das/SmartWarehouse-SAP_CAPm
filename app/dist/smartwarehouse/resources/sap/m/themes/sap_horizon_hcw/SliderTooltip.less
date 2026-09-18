@@ -1,0 +1,39 @@
+/* ==================================== */
+/* CSS for control sap.m/SliderTooltip  */
+/* Horizon High Contrast White theme    */
+/* ==================================== */
+
+/* Slider Tooltip styles          */
+
+.sapMSliderTooltip {
+	background: var(--sapBackgroundColor);
+	border-radius: 0.0625rem;
+	border: 1px solid var(--sapField_BorderColor);
+	box-shadow: none;
+	min-width: 2rem;
+	padding: 0.25rem;
+	font-size: var(--sapFontSmallSize);
+}
+
+.sapMSliderTooltipInput {
+	background-color: var(--sapField_Background);
+	font-size: @sapMFontMediumSize;
+	color: var(--sapField_TextColor);
+}
+
+.sapMSliderTooltipErrorState {
+	background: var(--sapField_InvalidBackground);
+	border-color: var(--sapField_InvalidColor);
+}
+
+.sapMSliderTooltipErrorState .sapMSliderTooltipInput {
+	background: var(--sapField_InvalidBackground);
+}
+
+.sapMSliderTooltip.sapMSliderTooltipNonEditableWrapper {
+	border-radius: 0.0625rem;
+	height: 1rem;
+	padding: 0.25rem;
+	font-size: var(--sapFontSmallSize);
+	color: var(--sapContent_LabelColor);
+}

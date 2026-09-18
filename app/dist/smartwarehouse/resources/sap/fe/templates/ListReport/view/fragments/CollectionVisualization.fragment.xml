@@ -1,0 +1,79 @@
+<core:FragmentDefinition
+	xmlns="sap.fe.templates.controls"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:contentSwitcher="sap.fe.macros.contentSwitcher"
+	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1"
+	template:require="{
+		COMMON: 'sap/fe/macros/CommonHelper'
+	}"
+>
+	<template:if test="{= ${converterContext>hasMultiVisualizations} }">
+		<template:then>
+			<m:VBox fitContainer="true" alignItems="Stretch" alignContent="Stretch" justifyContent="Start" renderType="Div">
+				<template:repeat list="{converterContext>views}" var="view">
+					<template:with path="view>primaryVisualization" var="presentationContext">
+						<template:if test="{= ${view>contentSwitcherId}}">
+							<template:then>
+								<contentSwitcher:ContentSwitcher id="{view>contentSwitcherId}" selectedKey="{pageInternal>alpContentView}">
+									<template:if test="{= COMMON.isDesktop() }">
+										<template:then>
+											<contentSwitcher:ContentSwitcherItem
+												text="{sap.fe.i18n>M_COMMON_HYBRID_SEGMENTED_BUTTON_ITEM_TOOLTIP}"
+												icon="sap-icon://chart-table-view"
+												key="Hybrid"
+												showAll="true"
+											/>
+										</template:then>
+									</template:if>
+									<contentSwitcher:ContentSwitcherItem
+										text="{sap.fe.i18n>M_COMMON_CHART_SEGMENTED_BUTTON_ITEM_TOOLTIP}"
+										icon="sap-icon://bar-chart"
+										key="Chart"
+										controlToSwitch="{view>chartControlId}::Chart"
+									/>
+									<contentSwitcher:ContentSwitcherItem
+										text="{sap.fe.i18n>M_COMMON_TABLE_SEGMENTED_BUTTON_ITEM_TOOLTIP}"
+										icon="sap-icon://table-view"
+										key="Table"
+										controlToSwitch="{view>tableControlId}::Table"
+									/>
+								</contentSwitcher:ContentSwitcher>
+							</template:then>
+						</template:if>
+						<template:repeat list="{presentationContext>visualizations}" var="visualizationDefinition">
+							<m:MessageStrip
+								text="{= '{parts:[{path:\'internal>controls/ignoredFields' + (${visualizationDefinition>collection}) + (${visualizationDefinition>type}) + '\'}, {value: \'' + (${visualizationDefinition>type} === 'Chart') + '\'},{value: ' + (${visualizationDefinition>type} === 'Chart' ? JSON.stringify(${visualizationDefinition>applySupported}) : '\'\'') + '}], formatter: \'.formatters.setALPControlMessageStrip\'}'}"
+								type="Information"
+								showIcon="true"
+								showCloseButton="true"
+								class="sapUiSmallMargin"
+								visible="{= '{= (${internal>controls/ignoredFields' + (${visualizationDefinition>collection}) + (${visualizationDefinition>type}) + '} || []).length>0 &amp;&amp; ${pageInternal>alpContentView} !== \'Table\'}' }"
+							/>
+							<core:Fragment
+								fragmentName="sap.fe.templates.ListReport.view.fragments.{visualizationDefinition>type}"
+								type="XML"
+							/>
+						</template:repeat>
+					</template:with>
+					<template:with path="view>secondaryVisualization" var="presentationContext">
+						<template:repeat list="{presentationContext>visualizations}" var="visualizationDefinition">
+							<m:Text text="" class="sapUiSmallMarginTop" visible="{= ${pageInternal>alpContentView} === 'Hybrid'}" />
+							<m:HBox height="100%" width="100%" visible="{= ${pageInternal>alpContentView} !== 'Chart'}">
+								<core:Fragment
+									fragmentName="sap.fe.templates.ListReport.view.fragments.{visualizationDefinition>type}"
+									type="XML"
+								/>
+							</m:HBox>
+						</template:repeat>
+					</template:with>
+				</template:repeat>
+			</m:VBox>
+		</template:then>
+		<template:else>
+			<template:repeat list="{presentationContext>visualizations}" var="visualizationDefinition">
+				<core:Fragment fragmentName="sap.fe.templates.ListReport.view.fragments.{visualizationDefinition>type}" type="XML" />
+			</template:repeat>
+		</template:else>
+	</template:if>
+</core:FragmentDefinition>

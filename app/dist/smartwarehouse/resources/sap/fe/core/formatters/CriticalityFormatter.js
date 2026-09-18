@@ -1,0 +1,6 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+ *      (c) Copyright 2009-2026 SAP SE. All rights reserved
+ */
+sap.ui.define([],function(){"use strict";const e=e=>{if(e!==undefined){switch(e){case"UI.CriticalityType/VeryNegative":case-1:case"-1":return"UI.CriticalityType/VeryNegative";case"UI.CriticalityType/Neutral":case 0:case"0":return"UI.CriticalityType/Neutral";case"UI.CriticalityType/Negative":case 1:case"1":return"UI.CriticalityType/Negative";case"UI.CriticalityType/Critical":case 2:case"2":return"UI.CriticalityType/Critical";case"UI.CriticalityType/Positive":case 3:case"3":return"UI.CriticalityType/Positive";case"UI.CriticalityType/VeryPositive":case 4:case"4":return"UI.CriticalityType/VeryPositive";case"UI.CriticalityType/Information":case 5:case"5":return"UI.CriticalityType/Information";default:return undefined}}return undefined};e.__functionName="._formatters.CriticalityFormatter#getCriticality";const i=function(e){if(i.hasOwnProperty(e)){for(var t=arguments.length,r=new Array(t>1?t-1:0),a=1;a<t;a++){r[a-1]=arguments[a]}return i[e].apply(this,r)}else{return""}};i.getCriticality=e;return i},false);
+//# sourceMappingURL=CriticalityFormatter.js.map

@@ -1,0 +1,14 @@
+allcoated
+collitem
+edmx
+fiori
+hana
+LINEITEM
+mockserver
+resoolt
+sapui
+sapux
+smargin
+unavail
+Warehouzzzz
+wdio

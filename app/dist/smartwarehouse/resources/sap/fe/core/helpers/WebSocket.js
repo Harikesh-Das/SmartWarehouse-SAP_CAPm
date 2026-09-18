@@ -1,0 +1,6 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+ *      (c) Copyright 2009-2026 SAP SE. All rights reserved
+ */
+sap.ui.define(["sap/ui/core/ws/SapPcpWebSocket"],function(e){"use strict";var t={};var n=e.SUPPORTED_PROTOCOLS;let o=function(e){e[e["CLOSED"]=0]="CLOSED";e[e["CLOSING"]=1]="CLOSING";e[e["CONNECTING"]=2]="CONNECTING";e[e["CONNECTED"]=3]="CONNECTED";e[e["ERROR"]=4]="ERROR";return e}({});t.WEBSOCKET_STATUS=o;let r=function(e){e["CollaborationDraft"]="CollaborationDraft";e["SideEffectsEvents"]="SideEffectsEvents";return e}({});t.ChannelType=r;function c(t,o,r){const c=o.getModel();const i=c.getServiceUrl();const f=a(c);if(!f){throw Error("WebSocket Base URL annotation not found")}const l=s(t,c);let C;C=o.getManifestObject().resolveUri(f);C+=`?${l}relatedService=${i}`;if(r){for(const e in r){C+=`&${e}=${encodeURI(r[e])}`}}return new e(C,[n.v10])}t.createWebSocket=c;function a(e){return e.getMetaModel().getObject("/@com.sap.vocabularies.Common.v1.WebSocketBaseURL")}t.getWebSocketBaseUrl=a;function s(e,t){if(!a(t)){return""}switch(e){case r.CollaborationDraft:return"";case r.SideEffectsEvents:const e=t.getMetaModel().getObject("/@com.sap.vocabularies.Common.v1.WebSocketChannel#sideEffects");return`sideEffects=${e}&`}}t.getWebSocketChannelUrl=s;return t},false);
+//# sourceMappingURL=WebSocket.js.map

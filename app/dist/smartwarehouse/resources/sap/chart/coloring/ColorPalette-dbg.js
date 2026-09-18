@@ -1,0 +1,168 @@
+/*!
+ * SAPUI5
+ * (c) Copyright 2026 SAP SE. All rights reserved.
+ */
+
+sap.ui.define([], function(
+) {
+	"use strict";
+	var Palette = {};
+
+	Palette.CRITICALITY = {
+		Positive: [
+		    'sapChart_Sequence_Good_Plus3',
+		    'sapChart_Sequence_Good_Plus2',
+		    'sapChart_Sequence_Good_Plus1',
+		    'sapChart_Sequence_Good',
+		    'sapChart_Sequence_Good_Minus1',
+		    'sapChart_Sequence_Good_Minus2'
+		],
+		Critical: [
+			'sapChart_Sequence_Critical_Plus3',
+			'sapChart_Sequence_Critical_Plus2',
+			'sapChart_Sequence_Critical_Plus1',
+			'sapChart_Sequence_Critical',
+			'sapChart_Sequence_Critical_Minus1',
+			'sapChart_Sequence_Critical_Minus2'
+		],
+		Negative: [
+			'sapChart_Sequence_Bad_Plus3',
+			'sapChart_Sequence_Bad_Plus2',
+			'sapChart_Sequence_Bad_Plus1',
+			'sapChart_Sequence_Bad',
+			'sapChart_Sequence_Bad_Minus1',
+			'sapChart_Sequence_Bad_Minus2'
+		],
+		Neutral: [
+			'sapChart_Sequence_Neutral_Plus3',
+			'sapChart_Sequence_Neutral_Plus2',
+			'sapChart_Sequence_Neutral_Plus1',
+			'sapChart_Sequence_Neutral',
+			'sapChart_Sequence_Neutral_Minus1',
+			'sapChart_Sequence_Neutral_Minus2'
+		]
+	};
+
+	Palette.EMPHASIS = {
+		Highlight: "sapChart_OrderedColor_2",
+		Others: "sapChart_OrderedColor_1"
+	};
+
+	Palette.GRADATION = {
+		SingleColorScheme: {
+			NoSemantics: [
+				'sapChart_Sequence_Neutral_Plus3',
+				'sapChart_Sequence_Neutral_Plus2',
+				'sapChart_Sequence_Neutral_Plus1',
+				'sapChart_Sequence_Neutral',
+				'sapChart_Sequence_Neutral_Minus1',
+				'sapChart_Sequence_Neutral_Minus2'
+			],
+			Positive: [
+				'sapChart_Sequence_Good_Plus3',
+			    'sapChart_Sequence_Good_Plus2',
+			    'sapChart_Sequence_Good_Plus1',
+			    'sapChart_Sequence_Good',
+			    'sapChart_Sequence_Good_Minus1',
+			    'sapChart_Sequence_Good_Minus2'
+			],
+			Negative: [
+				'sapChart_Sequence_Bad_Plus3',
+				'sapChart_Sequence_Bad_Plus2',
+				'sapChart_Sequence_Bad_Plus1',
+				'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Minus1',
+				'sapChart_Sequence_Bad_Minus2'
+			]
+		},
+		DivergingColorScheme: {
+			NoSemantics: [
+				'sapChart_Sequence_12_Minus2',
+				'sapChart_Sequence_12_Minus1',
+				'sapChart_Sequence_12',
+				'sapChart_Sequence_12_Plus1',
+				'sapChart_Sequence_12_Plus2',
+				'sapChart_Sequence_12_Plus3',
+				'sapChart_Sequence_Neutral',
+				'sapChart_Sequence_6_Plus3',
+				'sapChart_Sequence_6_Plus2',
+				'sapChart_Sequence_6_Plus1',
+				'sapChart_Sequence_6',
+				'sapChart_Sequence_6_Minus1',
+				'sapChart_Sequence_6_Minus2'
+			],
+			PositiveToNegative: [
+				'sapChart_Sequence_Good_Minus2',
+				'sapChart_Sequence_Good_Minus1',
+				'sapChart_Sequence_Good',
+				'sapChart_Sequence_Good_Plus1',
+				'sapChart_Sequence_Good_Plus2',
+				'sapChart_Sequence_Good_Plus3',
+			    'sapChart_Sequence_Neutral',
+			    'sapChart_Sequence_Bad_Plus3',
+				'sapChart_Sequence_Bad_Plus2',
+				'sapChart_Sequence_Bad_Plus1',
+				'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Minus1',
+				'sapChart_Sequence_Bad_Minus2'
+			],
+			NegativeToPositive: [
+				'sapChart_Sequence_Bad_Minus2',
+				'sapChart_Sequence_Bad_Minus1',
+				'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Plus1',
+				'sapChart_Sequence_Bad_Plus2',
+				'sapChart_Sequence_Bad_Plus3',
+				'sapChart_Sequence_Neutral',
+				'sapChart_Sequence_Good_Plus3',
+				'sapChart_Sequence_Good_Plus2',
+				'sapChart_Sequence_Good_Plus1',
+				'sapChart_Sequence_Good',
+				'sapChart_Sequence_Good_Minus1',
+				'sapChart_Sequence_Good_Minus2'
+			],
+			ColdToHot: [
+				'sapChart_Sequence_1_Minus2',
+				'sapChart_Sequence_1_Minus1',
+				'sapChart_Sequence_1',
+				'sapChart_Sequence_1_Plus1',
+				'sapChart_Sequence_1_Plus2',
+				'sapChart_Sequence_1_Plus3',
+				'sapChart_Sequence_Neutral',
+				'sapChart_Sequence_Bad_Plus3',
+				'sapChart_Sequence_Bad_Plus2',
+				'sapChart_Sequence_Bad_Plus1',
+				'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Minus1',
+				'sapChart_Sequence_Bad_Minus2'
+			],
+			HotToCold: [
+				'sapChart_Sequence_Bad_Minus2',
+				'sapChart_Sequence_Bad_Minus1',
+				'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Plus1',
+				'sapChart_Sequence_Bad_Plus2',
+				'sapChart_Sequence_Bad_Plus3',
+				'sapChart_Sequence_Neutral',
+				'sapChart_Sequence_1_Plus3',
+				'sapChart_Sequence_1_Plus2',
+				'sapChart_Sequence_1_Plus1',
+				'sapChart_Sequence_1',
+				'sapChart_Sequence_1_Minus1',
+				'sapChart_Sequence_1_Minus2'
+			]
+		},
+		TargetColorScheme: {
+			PositiveTarget: [
+			    'sapChart_Sequence_Bad',
+				'sapChart_Sequence_Bad_Plus2',
+			    'sapChart_Sequence_Critical_Plus1',
+				'sapChart_Sequence_Critical_Plus3',
+				'sapChart_Sequence_Good_Plus2',
+				'sapChart_Sequence_Good'
+			]
+		}
+	};
+
+	return Palette;
+});
