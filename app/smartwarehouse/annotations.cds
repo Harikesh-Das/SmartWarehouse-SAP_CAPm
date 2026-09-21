@@ -1,37 +1,95 @@
 using WarehouseService from '../../srv/warehouse-service';
 
+
+// Sales Order annotations
+
 annotate WarehouseService.SalesOrder with @UI.HeaderInfo: {
     TypeName      : 'Sales Order',
     TypeNamePlural: 'Sales Orders',
     Title         : {Value: orderId},
-    Description   : {Value: customerId} 
+    Description   : {Value: customerId}
 };
 
-annotate WarehouseService.SalesOrder with @UI.Identification: [
-    {Value: orderId, Label: 'Order ID'},
-    {Value: customerId, Label: 'Cust ID'},
-    {Value: status, Label: 'Order Status'},
-    {Value: customerLatitude, Label: 'Customer Latitude'}
+annotate WarehouseService.SalesOrder with @UI.LineItem: [
+    {
+        Value: orderId,
+        Label: 'Order ID'
+    },
+    {
+        Value: customerId,
+        Label: 'Customer ID'
+    },
+    {
+        Value: status,
+        Label: 'Status'
+    },
+    {
+        Value: allocatedWarehouse,
+        Label: 'Allocated Warehouse'
+    }
 ];
 
-annotate WarehouseService.Item with @UI.LineItem: [
-    {Value: itemId},
-    {Value: quantity},
-    
+annotate WarehouseService.SalesOrder with @UI.SelectionFields: [
+    orderId,
+    customerId,
+    status
+];
+
+annotate WarehouseService.SalesOrder with @UI.Identification: [
+    {
+        Value: orderId,
+        Label: 'Order ID'
+    },
+    {
+        Value: customerId,
+        Label: 'Cust ID'
+    },
+    {
+        Value: status,
+        Label: 'Order Status'
+    },
+    {
+        Value: allocatedWarehouse,
+        Label: 'Allocated Warehouse'
+    },
+    {
+        Value: customerLatitude,
+        Label: 'Customer Latitude'
+    },
+    {
+        Value: customerLongitude,
+        Label: 'Customer Longitude'
+    }
 ];
 
 annotate WarehouseService.SalesOrder with @UI.Facets: [
+
     {
         $Type : 'UI.ReferenceFacet',
         ID    : 'GeneralInfo',
         Label : 'Sales Order Details',
         Target: '@UI.Identification'
     },
+
     {
         $Type : 'UI.ReferenceFacet',
         ID    : 'Items',
         Label : 'Items in the Sales Order',
         Target: 'items/@UI.LineItem'
+    }
+];
+
+
+// Item annotations
+
+annotate WarehouseService.Item with @UI.LineItem: [
+    {
+        Value: itemId,
+        Label: 'Item ID'
+    },
+    {
+        Value: quantity,
+        Label: 'Quantity'
     }
 ];
 
@@ -42,13 +100,30 @@ annotate WarehouseService.Item with @UI.HeaderInfo: {
 };
 
 annotate WarehouseService.Item with @UI.Identification: [
-    {Value: itemId},
-    {Value: quantity}
+    {
+        Value: itemId,
+        Label: 'Item ID'
+    },
+    {
+        Value: quantity,
+        Label: 'Quantity'
+    }
 ];
 
 annotate WarehouseService.Item with @UI.Facets: [{
     $Type : 'UI.ReferenceFacet',
     ID    : 'ItemDetails',
-    Label : 'Item Details',
-    Target: '@UI.Identification'
+    Label : 'Item Information',
+    Target: '@UI.FieldGroup#ItemInformation'
 }];
+
+annotate WarehouseService.Item with @UI.FieldGroup #ItemInformation: {Data: [
+    {
+        Value: itemId,
+        Label: 'Item ID'
+    },
+    {
+        Value: quantity,
+        Label: 'Quantity'
+    }
+]};
