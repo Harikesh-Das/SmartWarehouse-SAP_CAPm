@@ -67,6 +67,9 @@ sap.ui.define([
 
                 await oAction.execute();
 
+                await oContext.requestRefresh();
+                oModel.refresh();
+
                 const oResult =
                     await oAction
                         .getBoundContext()

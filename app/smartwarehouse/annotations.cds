@@ -35,6 +35,7 @@ annotate WarehouseService.SalesOrder with @UI.SelectionFields: [
     status
 ];
 
+
 annotate WarehouseService.SalesOrder with @UI.Identification: [
     {
         Value: orderId,
@@ -59,6 +60,14 @@ annotate WarehouseService.SalesOrder with @UI.Identification: [
     {
         Value: customerLongitude,
         Label: 'Customer Longitude'
+    },
+    {
+        Value: availableItems,
+        Label: 'Available Items'
+    },
+    {
+        Value: unavailableItems,
+        Label: 'Unavailable Items'
     }
 ];
 

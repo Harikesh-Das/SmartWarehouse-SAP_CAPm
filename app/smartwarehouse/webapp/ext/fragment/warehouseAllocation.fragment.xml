@@ -50,7 +50,9 @@
         <Button
             id="allocate"
             text="Allocate Warehouse"
+            type="Emphasized"
             core:require="{handler: 'smartwarehouse/ext/controller/warehouseAllocation.controller'}"
+            icon="sap-icon://retail-store"
             press="handler.allocateWarehouse"
             class="sapUiSmallMargin"
         />
