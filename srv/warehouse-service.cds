@@ -6,6 +6,10 @@ type BestWarehouse : {
     availableItems: String;
     unavailableItems: String;
 };
+type BestOtherWarehouse:{
+    warehouseIds:String;
+    availableItem: String;
+}
 //-----------------------------------------------------------------------------------------------------------
 
 /* Projections */
@@ -22,4 +26,12 @@ service WarehouseService {
 
     /* Actions */
     action getBestWarehouse(salesOrderId:UUID) returns BestWarehouse;
+
+    // Below Features Still in development no use for now
+    
+    // action findUnavailableItems(salesOrderId:UUID) returns many BestOtherWarehouse;
+
+    
+
+
 }

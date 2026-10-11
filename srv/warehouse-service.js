@@ -57,7 +57,10 @@ async function getWarehouseDistances(customerLat, customerLon, warehouses) {
 export default cds.service.impl(function () {
 
     /* Accessing Entities */
-    const { SalesOrder, Item, Warehouse } = this.entities;
+    const
+        {
+            SalesOrder, Item, Warehouse, WarehouseSalesOrder, WarehouseSOItem, WarehousePurchaseOrder, WarehousePOItem
+        } = this.entities;
     //-------------------------------------------------------------------------------------------------------
 
     /* Event Handlers */
@@ -80,6 +83,10 @@ export default cds.service.impl(function () {
                 404,
                 `SalesOrder:${salesOrderId} not found`
             );
+        }
+
+        if (salesOrder.status === 'allocated') {
+            return req.reject(400, ` warehouse already has been allocated for SalesOrder:${salesOrder.orderId} `)
         }
 
 
@@ -268,6 +275,19 @@ export default cds.service.impl(function () {
             availableItemIds.push(item.itemId);
         }
 
+        await tx.run(
+            UPDATE(SalesOrder).set({ status: 'allocated' }).where({ ID: salesOrderId })
+        )
+
+        await tx.run(
+            UPDATE(SalesOrder).set({ allocatedWarehouse: nearest.warehouseId }).where({ ID: salesOrderId })
+        )
+
+        await tx.run(
+            UPDATE(SalesOrder).set({ availableItems: availableItemIds.join(','), unavailableItems: unavailableItemIds.join(',') })
+                .where({ ID: salesOrderId })
+        )
+
 
         // Return result
         return {
@@ -276,4 +296,87 @@ export default cds.service.impl(function () {
             unavailableItems: unavailableItemIds.join(',')
         };
     });
+    //--------------------------------------------------------------------------------------------------------------
+
+    // Below Features Still in development no use for now
+
+    // findUnavailableItems
+    /* this.on(findUnavailableItems, async (req) => {
+        const tx = cds.tx(req);
+        const { salesOrderId } = req.data;
+
+        const salesOrder = await tx.run(
+            SELECT.one.from(SalesOrder)
+                .where({ ID: salesOrderId })
+        );
+
+        if (!salesOrder) {
+            return req.reject(
+                404,
+                `SalesOrder:${salesOrderId} not found`
+            );
+        }
+
+        const vAvailItems = salesOrder.availableItems;
+        const vUnavailItems = salesOrder.unavailableItems;
+
+        const nearestWarehouse = async (vAvailItems) => {
+
+            // Get all warehouse stock rows
+            const warehouseRows = await tx.run(
+                SELECT.from(Warehouse)
+            );
+
+            if (warehouseRows.length === 0) {
+                return req.reject(
+                    404,
+                    `No warehouse stock found`
+                );
+            }
+
+            const allItems = await tx.run(
+                SELECT.from(Item).columns('ID', 'itemId')
+            );
+
+            const itemIdMap = new Map(
+                allItems.map(item => [item.ID, item.itemId])
+            );
+
+            for (const row of warehouseRows) {
+                row.productItemId = itemIdMap.get(row.item_ID);
+            }
+
+            let distances;
+
+            try {
+                distances = await getWarehouseDistances(
+                    salesOrder.customerLatitude,
+                    salesOrder.customerLongitude,
+                    vAvailItems
+                );
+            } catch (error) {
+                return req.reject(500, error.message);
+            }
+        
+
+
+
+            // Find nearest among maximum coverage warehouses
+            distances.sort(
+                (a, b) => a.distance - b.distance
+            );
+
+            const nearest = distances[0];
+
+            const selectedWarehouse = bestCandidates.find(
+                w => w.warehouseId === nearest.warehouseId
+            );
+
+            const nearestWarehouse= nearest.warehouseId
+        }
+
+
+
+    }); 
+    */
 });
