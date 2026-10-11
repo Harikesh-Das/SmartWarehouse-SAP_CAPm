@@ -1,5 +1,10 @@
 # SmartWarehouse — SAP CAPm
 
+[![SAP CAP](https://img.shields.io/badge/SAP%20CAP-009FDA?style=for-the-badge&logo=sap&logoColor=white)](https://cap.cloud.sap/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![SAP HANA](https://img.shields.io/badge/SAP%20HANA-008FD3?style=for-the-badge&logo=sap&logoColor=white)](https://www.sap.com/products/technology-platform/hana/what-is-sap-hana.html)
+
 A warehouse management application built using **SAP Cloud Application Programming Model (CAPm)** and **SAP Fiori Elements**. The application identifies the best warehouse for a sales order based on item availability and driving distance, then updates stock during allocation.
 
 ## Features
@@ -12,7 +17,7 @@ A warehouse management application built using **SAP Cloud Application Programmi
 - **Stock Management** — Deducts allocated quantities and deletes warehouse stock records when stock reaches zero.
 - **Allocation Summary** — Displays total quantity, average quantity, item count, selected warehouse, available items, and unavailable items.
 - **OData V4** — Exposes backend entities and actions through an OData V4 service.
-
+---
 ## Tech Stack
 
 - SAP Cloud Application Programming Model (CAPm)
